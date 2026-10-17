@@ -2,7 +2,9 @@
 REM Regenerates every STL and preview PNG from the .scad sources (Manifold backend, ~10 s total).
 setlocal
 cd /d "%~dp0"
-set OSC=tools\OpenSCAD-nightly\openscad.com
+REM Uses a portable snapshot in tools\ if present, otherwise "openscad" from PATH (needs a 2024+ snapshot for Manifold).
+set OSC=openscad
+if exist "tools\OpenSCAD-nightly\openscad.com" set OSC=tools\OpenSCAD-nightly\openscad.com
 for %%F in (01_test_ring 02_vault_cap 03_flip_base 03_flip_lid 03_flip_seal_tpu 04_port_cap 04_port_plug 04_port_gasket 05_neck_gasket neck_reference) do (
   echo Rendering %%F ...
   "%OSC%" --backend=Manifold -o "stl\%%F.stl" "scad\%%F.scad"
