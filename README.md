@@ -22,14 +22,37 @@ No official thread spec exists, so you measure the neck once, enter the numbers 
 All parts print flat without supports. Every seal lifts out and there are no blind pockets, so
 everything can be washed. See the [cross-sections](preview/sections_2d.png) for how each seals.
 
-## Quick start
+## Setup
 
-1. **Measure** the bottle neck with calipers and enter the values in [`params.scad`](scad/params.scad) (table below).
-2. **Render** with [OpenSCAD](https://openscad.org/downloads.html). A 2024+ development snapshot with the
-   Manifold backend renders each part in about a second. Open a `.scad` file, press F6, then F7 to export.
-   On Windows, [`render_all.cmd`](render_all.cmd) regenerates every STL at once.
+**You need:** digital calipers, an FDM printer (0.4 mm nozzle), PETG, and ideally TPU 95A for the seals.
+
+1. **Get the files.** Clone the repo, or use **Code → Download ZIP** on GitHub.
+
+   ```bash
+   git clone https://github.com/knox-101/boldfit-gallon-cap.git
+   ```
+
+2. **Install OpenSCAD.** Use a **development snapshot** from [openscad.org/downloads](https://openscad.org/downloads.html#snapshots),
+   not the 2021.01 stable release. Snapshots include the Manifold backend, which renders each part in about a second
+   instead of several minutes. In OpenSCAD, go to **Edit → Preferences → Advanced** and set **Backend** to **Manifold**.
+
+3. **Optional, for the one-click script on Windows.** Either add OpenSCAD to your PATH, or unzip the portable
+   snapshot into `tools/OpenSCAD-nightly/` inside this folder. [`render_all.cmd`](render_all.cmd) checks both.
+
+## Usage
+
+1. **Measure** the bottle neck and enter the values in [`scad/params.scad`](scad/params.scad). See the table below.
+2. **Render.** Pick one:
+   - **GUI:** open a file such as `scad/01_test_ring.scad`, press **F6** to render, then **F7** to save the STL.
+   - **Windows, all parts:** double-click `render_all.cmd`. STLs go to `stl/`, previews to `preview/`.
+   - **Command line, one part:**
+
+     ```bash
+     openscad --backend=Manifold -o stl/01_test_ring.stl scad/01_test_ring.scad
+     ```
+
 3. **Print the test ring** and screw it on. Adjust `radial_clear` by ±0.1 until it turns smoothly.
-4. **Print** your chosen cap and gaskets.
+4. **Print** your chosen cap and gaskets, then fit the neck gasket into the cap before first use.
 
 ### Neck measurements
 
